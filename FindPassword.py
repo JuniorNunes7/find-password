@@ -6,59 +6,80 @@
 # @author Junior Nunes
 ##########################
 
-checkedNumbers = []
+IGNORED_NUMBERS = []
 
-def correctPlaced(code, checkCode, n):
-    global checkedNumbers
-    for i in range(len(code)):
-        if(code[i] == checkCode[i]):
-            checkedNumbers.append([code[i], i])
+def correct_placed(code, check_code, n):
+    for i, value in enumerate(code):
+        if value == check_code[i]:
             n -= 1
 
     return n == 0
 
-def correctNumber(code, checkCode, n):
-    for i, number in enumerate(checkCode):
-        if(number in code and number != code[i]):
-            if([number, i] in checkedNumbers):
-                return False
-            n -= 1
+def correct_number(code, check_code, num):
+    for i, number in enumerate(check_code):
+        if number in code and number != code[i]:
+            num -= 1
 
-    return n == 0
+    return num == 0
 
-def check5(code):
-    checkCode = [7,8,0]
-    return correctNumber(code, checkCode, 1)
-
-def check4(code):
-    checkCode = [7,3,8]
-    return check5(code) if correctNumber(code, checkCode, 0) else False
-
-def check3(code):
-    checkCode = [2,0,6]
-    return check4(code) if correctNumber(code, checkCode, 2) else False
-
-def check2(code):
-    checkCode = [6,1,4]
-    return check3(code) if correctNumber(code, checkCode, 1) else False
-
-def check1(code):
-    checkCode = [6,8,2]
-    return check2(code) if correctPlaced(code, checkCode, 1) else False
-
-def check(code):
+def check(code, tests):
     code = [int(i) for i in code]
-    return check1(code)
+    for test in tests:
+        if not test['method'](code, test['code'], test['corrects']):
+            return False
+    
+    return True
 
-def generateCode(length):
-    global checkedNumbers
-    maxRepeat = 10**length;
-    pre = str(maxRepeat)[-length:]
+def get_password(tests):
+    length = len(tests[0]['code'])
+    max_repeat = 10 ** length
+    pre = str(max_repeat)[-length:]
 
-    for x in range(0, maxRepeat):
-        checkedNumbers = []
+    for test in tests:
+        if test['method'] == correct_number and test['corrects'] == 0:
+            IGNORED_NUMBERS.extend(test['code'])
+
+    for x in range(0, max_repeat):
         code = (pre + str(x))[-length:]
-        if(check(code)):
-            print("A senha é: " + code);
 
-generateCode(3)
+        if any(str(a) in code for a in IGNORED_NUMBERS):
+            continue
+
+        if check(code, tests):
+            print "Sequência possível: " + code
+
+# 042
+get_password([
+    {'code': [6, 8, 2], 'method': correct_placed, 'corrects': 1},
+    {'code': [6, 1, 4], 'method': correct_number, 'corrects': 1},
+    {'code': [2, 0, 6], 'method': correct_number, 'corrects': 2},
+    {'code': [7, 3, 8], 'method': correct_number, 'corrects': 0},
+    {'code': [7, 8, 0], 'method': correct_number, 'corrects': 1}
+])
+
+# 718
+# get_password([
+#     {'code': [5, 4, 8], 'method': correct_placed, 'corrects': 1},
+#     {'code': [5, 3, 0], 'method': correct_number, 'corrects': 0},
+#     {'code': [1, 5, 7], 'method': correct_number, 'corrects': 2},
+#     {'code': [8, 0, 6], 'method': correct_number, 'corrects': 1},
+#     {'code': [6, 4, 7], 'method': correct_number, 'corrects': 1}
+# ])
+
+# 281
+# get_password([
+#     {'code': [6, 3, 1], 'method': correct_placed, 'corrects': 1},
+#     {'code': [7, 3, 0], 'method': correct_number, 'corrects': 0},
+#     {'code': [1, 0, 2], 'method': correct_number, 'corrects': 2},
+#     {'code': [6, 7, 8], 'method': correct_number, 'corrects': 1},
+#     {'code': [0, 8, 7], 'method': correct_placed, 'corrects': 1}
+# ])
+
+# 682
+# get_password([
+#     {'code': [3, 4, 2], 'method': correct_placed, 'corrects': 1},
+#     {'code': [4, 7, 3], 'method': correct_number, 'corrects': 0},
+#     {'code': [1, 4, 6], 'method': correct_number, 'corrects': 1},
+#     {'code': [0, 6, 9], 'method': correct_number, 'corrects': 1},
+#     {'code': [8, 7, 6], 'method': correct_number, 'corrects': 2}
+# ])
