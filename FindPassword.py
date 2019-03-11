@@ -25,7 +25,7 @@ def correct_number(code, check_code, num):
 def check(code, tests):
     code = [int(i) for i in code]
     for test in tests:
-        if not test['method'](code, test['code'], test['corrects']):
+        if not test['method'](code, test['code'], test['correct']):
             return False
     
     return True
@@ -36,7 +36,7 @@ def get_password(tests):
     pre = str(max_repeat)[-length:]
 
     for test in tests:
-        if test['method'] == correct_number and test['corrects'] == 0:
+        if test['method'] == correct_number and test['correct'] == 0:
             IGNORED_NUMBERS.extend(test['code'])
 
     for x in range(0, max_repeat):
@@ -50,36 +50,36 @@ def get_password(tests):
 
 # 042
 get_password([
-    {'code': [6, 8, 2], 'method': correct_placed, 'corrects': 1},
-    {'code': [6, 1, 4], 'method': correct_number, 'corrects': 1},
-    {'code': [2, 0, 6], 'method': correct_number, 'corrects': 2},
-    {'code': [7, 3, 8], 'method': correct_number, 'corrects': 0},
-    {'code': [7, 8, 0], 'method': correct_number, 'corrects': 1}
+    {'code': [6, 8, 2], 'method': correct_placed, 'correct': 1},
+    {'code': [6, 1, 4], 'method': correct_number, 'correct': 1},
+    {'code': [2, 0, 6], 'method': correct_number, 'correct': 2},
+    {'code': [7, 3, 8], 'method': correct_number, 'correct': 0},
+    {'code': [7, 8, 0], 'method': correct_number, 'correct': 1}
 ])
 
 # 718
 # get_password([
-#     {'code': [5, 4, 8], 'method': correct_placed, 'corrects': 1},
-#     {'code': [5, 3, 0], 'method': correct_number, 'corrects': 0},
-#     {'code': [1, 5, 7], 'method': correct_number, 'corrects': 2},
-#     {'code': [8, 0, 6], 'method': correct_number, 'corrects': 1},
-#     {'code': [6, 4, 7], 'method': correct_number, 'corrects': 1}
+#     {'code': [5, 4, 8], 'method': correct_placed, 'correct': 1},
+#     {'code': [5, 3, 0], 'method': correct_number, 'correct': 0},
+#     {'code': [1, 5, 7], 'method': correct_number, 'correct': 2},
+#     {'code': [8, 0, 6], 'method': correct_number, 'correct': 1},
+#     {'code': [6, 4, 7], 'method': correct_number, 'correct': 1}
 # ])
 
 # 281
 # get_password([
-#     {'code': [6, 3, 1], 'method': correct_placed, 'corrects': 1},
-#     {'code': [7, 3, 0], 'method': correct_number, 'corrects': 0},
-#     {'code': [1, 0, 2], 'method': correct_number, 'corrects': 2},
-#     {'code': [6, 7, 8], 'method': correct_number, 'corrects': 1},
-#     {'code': [0, 8, 7], 'method': correct_placed, 'corrects': 1}
+#     {'code': [6, 3, 1], 'method': correct_placed, 'correct': 1},
+#     {'code': [7, 3, 0], 'method': correct_number, 'correct': 0},
+#     {'code': [1, 0, 2], 'method': correct_number, 'correct': 2},
+#     {'code': [6, 7, 8], 'method': correct_number, 'correct': 1},
+#     {'code': [0, 8, 7], 'method': correct_placed, 'correct': 1}
 # ])
 
 # 682
 # get_password([
-#     {'code': [3, 4, 2], 'method': correct_placed, 'corrects': 1},
-#     {'code': [4, 7, 3], 'method': correct_number, 'corrects': 0},
-#     {'code': [1, 4, 6], 'method': correct_number, 'corrects': 1},
-#     {'code': [0, 6, 9], 'method': correct_number, 'corrects': 1},
-#     {'code': [8, 7, 6], 'method': correct_number, 'corrects': 2}
+#     {'code': [3, 4, 2], 'method': correct_placed, 'correct': 1},
+#     {'code': [4, 7, 3], 'method': correct_number, 'correct': 0},
+#     {'code': [1, 4, 6], 'method': correct_number, 'correct': 1},
+#     {'code': [0, 6, 9], 'method': correct_number, 'correct': 1},
+#     {'code': [8, 7, 6], 'method': correct_number, 'correct': 2}
 # ])
