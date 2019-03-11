@@ -22,4 +22,6 @@
 
 - `correct` - Total of correct numbers according the `method`.
 
-You can test this with other challenges... [here](https://www.google.com.br/search?q=crack+the+code&tbm=isch).
+
+
+#### You can test it in other challenges... [here](https://www.google.com.br/search?q=crack+the+code&tbm=isch).
