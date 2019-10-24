@@ -1,6 +1,6 @@
 ## Find Password
 
-![Password Challenge](http://oi68.tinypic.com/2qk2cmx.jpg)
+![Password Challenge](https://i.ytimg.com/vi/-uhKZTjIoeQ/maxresdefault.jpg)
 
 
 ### Configuration
@@ -15,7 +15,7 @@
   ])
 ```
 - `code` - Array with the hint numbers.
-  
+
 - `method`
   - Use the method correct_placed to right numbers and correct placed.
   - Use the method correct_number to numbers right numbers, but wrong placed.
