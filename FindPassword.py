@@ -46,7 +46,7 @@ def get_password(tests):
             continue
 
         if check(code, tests):
-            print "Possible password: " + code
+            print("Possible password: " + code)
 
 # 042
 get_password([
